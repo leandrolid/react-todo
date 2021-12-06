@@ -6,15 +6,32 @@ export const TodoForm = () => {
   const { todos, setTodos } = React.useContext(TodosContext);
   const [task, setTask] = React.useState('');
 
+  const getId = () => {
+    if (todos.length > 0) {
+      const { id: lastItemId } = todos[todos.length - 1];
+      return lastItemId + 1;
+    }
+
+    return 0;
+  };
+
   const handleAddTodo = () => {
     const whiteSpaceRemoved = task.trim();
     const isFilled = whiteSpaceRemoved.length > 0;
 
     if (isFilled) {
-      const { id: lastItemId } = todos[todos.length - 1] || 0;
+      const id = getId();
 
       const newTask = {
-        id: lastItemId + 1,
+        id,
+        label: task,
+        checked: false,
+      };
+
+      setTodos([...todos, newTask]);
+    } else {
+      const newTask = {
+        id: 0,
         label: task,
         checked: false,
       };
