@@ -29,14 +29,6 @@ export const TodoForm = () => {
       };
 
       setTodos([...todos, newTask]);
-    } else {
-      const newTask = {
-        id: 0,
-        label: task,
-        checked: false,
-      };
-
-      setTodos([...todos, newTask]);
     }
 
     setTask('');
