@@ -7,7 +7,10 @@ export const TodoForm = () => {
   const [task, setTask] = React.useState('');
 
   const handleAddTodo = () => {
-    if (task.length) {
+    const whiteSpaceRemoved = task.trim();
+    const isFilled = whiteSpaceRemoved.length > 0;
+
+    if (isFilled) {
       const { id: lastItemId } = todos[todos.length - 1] || 0;
 
       const newTask = {
@@ -17,9 +20,9 @@ export const TodoForm = () => {
       };
 
       setTodos([...todos, newTask]);
-
-      setTask('');
     }
+
+    setTask('');
   };
 
   const handleKeyUp = (e) => {
